@@ -1,0 +1,35 @@
+
+body{
+    background-color:  red;
+    margin: 0;
+    padding: 0;
+}
+
+div{
+ 
+    text-align:  center ;
+    width: 280px;
+    height: 300px;
+
+
+   
+}
+h1{
+    text-align: center;
+    margin-left: 10px;
+    font-size: 30px;
+
+
+}
+
+
+
+ul li{
+    font-size: 24px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}
