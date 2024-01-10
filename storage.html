@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Simple To-Do List</title>
+  </head>
+  <body>
+      <h1>To-Do List</h1>
+      <input type="text" id="taskInput" placeholder="Enter task">
+      <button onclick="addTask()">Add Task</button>
+      <ul id="taskList"></ul>
+  
+      <script>
+          // Function to add a task
+          function addTask() {
+              // Get the input value
+              var taskInput = document.getElementById("taskInput");
+              var taskText = taskInput.value;
+  
+              // Check if the input is not empty
+              if (taskText.trim() !== "") {
+                  // Get existing tasks from localStorage or initialize an empty array
+                  var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  
+                  // Add the new task to the array
+                  tasks.push(taskText);
+  
+                  // Save the updated tasks back to localStorage
+                  localStorage.setItem("tasks", JSON.stringify(tasks));
+  
+                  // Clear the input field
+                  taskInput.value = "";
+  
+                  // Update the task list on the page
+                  displayTasks();
+              }
+          }
+  
+          // Function to display tasks on the page
+          function displayTasks() {
+              var taskList = document.getElementById("taskList");
+              var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  
+              // Clear the existing task list
+              taskList.innerHTML = "";
+  
+              // Add each task to the list
+              tasks.forEach(function (task) {
+                  var listItem = document.createElement("li");
+                  listItem.textContent = task;
+                  taskList.appendChild(listItem);
+              });
+          }
+  
+          // Display tasks when the page loads
+          displayTasks();
+      </script>
+  </body>
+  </html>
+  
