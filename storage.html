@@ -1,64 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Simple To-Do List</title>
-  </head>
-  <body>
-      <h1>To-Do List</h1>
-      <input type="text" id="taskInput" placeholder="Enter task">
-      <button onclick="addTask()">Add Task</button>
-      <ul id="taskList"></ul>
-  
-      <script>
-          // Function to add a task
-          function addTask() {
-              // Get the input value
-              var taskInput = document.getElementById("taskInput");
-              var taskText = taskInput.value;
-  
-              // Check if the input is not empty
-              if (taskText.trim() !== "") {
-                  // Get existing tasks from localStorage or initialize an empty array
-                  var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  
-                  // Add the new task to the array
-                  tasks.push(taskText);
-  
-                  // Save the updated tasks back to localStorage
-                  localStorage.setItem("tasks", JSON.stringify(tasks));
-  
-                  // Clear the input field
-                  taskInput.value = "";
-  
-                  // Update the task list on the page
-                  displayTasks();
-              }
-          }
-  
-          // Function to display tasks on the page
-          function displayTasks() {
-              var taskList = document.getElementById("taskList");
-              var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  
-              // Clear the existing task list
-              taskList.innerHTML = "";
-  
-              // Add each task to the list
-              tasks.forEach(function (task) {
-                  var listItem = document.createElement("li");
-                  listItem.textContent = task;
-                  taskList.appendChild(listItem);
-              });
-          }
-  
-          // Display tasks when the page loads
-          displayTasks();
-      </script>
-  </body>
-  </html>
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taking App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f2f2;
+        }
+
+        #noteInput, #noteTextarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        #noteList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .note {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .note-actions {
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin-right: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Note Taking App</h1>
+
+    <input type="text" id="noteInput" placeholder="Type your note here">
+    <button onclick="addNote()">Add Note</button>
+
+    <ul id="noteList"></ul>
+
+    <textarea id="noteTextarea" placeholder="Edit your note"></textarea>
+    <div class="note-actions">
+        <button onclick="saveEdit()">Save Edit</button>
+        <button onclick="undoEdit()">Undo</button>
+        <button onclick="deleteNote()">Delete Note</button>
+    </div>
+
+    <script>
+        let notes = [];
+        let currentNoteIndex = -1;
+        let undoStack = [];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadNotesFromStorage();
+            displayNotes();
+        });
+
+        function addNote() {
+            const noteInput = document.getElementById('noteInput');
+            const noteText = noteInput.value.trim();
+
+            if (noteText !== '') {
+                const note = { text: noteText, timestamp: new Date().toISOString() };
+                notes.push(note);
+                saveNotesToStorage();
+                displayNotes();
+                noteInput.value = '';
+            }
+        }
+
+        function displayNotes() {
+            const noteList = document.getElementById('noteList');
+            noteList.innerHTML = '';
+
+            notes.forEach((note, index) => {
+                const li = document.createElement('li');
+                li.className = 'note';
+                li.textContent = `${note.text} - ${new Date(note.timestamp).toLocaleString()}`;
+                li.onclick = () => selectNote(index);
+                noteList.appendChild(li);
+            });
+        }
+
+        function selectNote(index) {
+            currentNoteIndex = index;
+            const selectedNote = notes[currentNoteIndex];
+            const noteTextarea = document.getElementById('noteTextarea');
+            noteTextarea.value = selectedNote.text;
+        }
+
+        function saveEdit() {
+            if (currentNoteIndex !== -1) {
+                const noteTextarea = document.getElementById('noteTextarea');
+                const editedText = noteTextarea.value.trim();
+                if (editedText !== '') {
+                    const editedNote = { text: editedText, timestamp: new Date().toISOString() };
+                    notes[currentNoteIndex] = editedNote;
+                    saveNotesToStorage();
+                    displayNotes();
+                    clearEditArea();
+                }
+            }
+        }
+
+        function undoEdit() {
+            if (undoStack.length > 0) {
+                const lastEdit = undoStack.pop();
+                notes[currentNoteIndex] = lastEdit;
+                saveNotesToStorage();
+                displayNotes();
+                selectNote(currentNoteIndex);
+            }
+        }
+
+        function deleteNote() {
+            if (currentNoteIndex !== -1) {
+                notes.splice(currentNoteIndex, 1);
+                saveNotesToStorage();
+                displayNotes();
+                clearEditArea();
+            }
+        }
+
+        function saveNotesToStorage() {
+            localStorage.setItem('notes', JSON.stringify(notes));
+        }
+
+        function loadNotesFromStorage() {
+            const storedNotes = localStorage.getItem('notes');
+            notes = storedNotes ? JSON.parse(storedNotes) : [];
+        }
+
+        function clearEditArea() {
+            currentNoteIndex = -1;
+            const noteTextarea = document.getElementById('noteTextarea');
+            noteTextarea.value = '';
+        }
+    </script>
+
+</body>
+</html>
