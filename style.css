@@ -1,14 +1,262 @@
+
+
+*{
+
+ text-decoration: none;   
+}
+
+
 body{
-    break-after: green;
-    margin: 20px;
-    padding: 20px;
+
+
 }
 
-div{
-  
+header{
+    background-color: #f3f3f3;
+    width: 100%;
+    height: 100px;
+text-transform: uppercase;
+color: #111;
+font-size: bold;
 
+}
+
+header.header-brand{
+    font-family: catamaran;
+    font-size: 24px;
+    color: white;
+    font-weight: 900;
+    text-transform: uppercase;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding:  20px 0;
+
+}
+
+header nav ul{
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
+
+}
+
+header nav ul li{
+    display:inline-block;
+    float: left;
+    list-style: none;
+    padding: 16px ;
+    margin-top: 20px;
+
+}
+
+header nav ul li a{
+    font-family: catamaran;
+    font-size: 34px;
+    color: #111;
+  text-transform: uppercase;  
+}
+
+.header-cases{
+display: none;
+
+}
+
+@media only screen and (min-width:1000px){
+   header .header-brand{
+        margin: 0;
+        text-align: left;
+        padding: 0 20px 0 40px;
+        float: left;
+        margin-top: 30px;
+        line-height: 30px;
+        border-right: 3px solid #111;
+    }
+
+    header nav ul{
+        margin: 0;
+        margin-left: 0px;
+        float: left;
+        
+    }
+    
+    header nav ul li{
+        margin-bottom: 20px;   
+    }
+    
+    header nav ul li a{
+    
+        line-height: 60px;
+        
+    }
+    
+    .header-cases{
+        display:block;
+        font-family: catamaran;
+        font-size: 16px;
+        color: #111;
+        line-height: 40px;
+        text-transform: uppercase;
+        border:1px solid #111;
+        float:right;
+        padding:  0 20px;
+        margin-right: 40px; 
+        margin-top: 30px; 
+        padding: 0 20px;
+}
+        
+        }
+.index-banner{
+        width: 100%;
+        height: calc(100vh - 100px);
+        background-image:url(khadar.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+}
+
+.index-banner h2{
+        font-family: catamaran;
+        font-size: 60px;
+        color: #fff;
+        text-align: center;
+        font-weight: 900;
+        line-height: 70px;
+        text-shadow:  2px 2px 8px#111;
+}
+
+.index-banner h1{
+        font-family: catamaran garamond;
+        font-size: 25px;
+        color: #fff;
+        text-align: center;
+        font-weight: 100;
+        text-shadow:  2px 2px 8px#111;
+        font-style: italic;
+        line-height: 40px;
+}
+.vertical-center{
+
+    display:table-cell;  
+    vertical-align: middle;
+    }
+
+.index-links div {
+        margin: 16px 16px 0;
+        width: calc(100% - 32px);
+        height: 100px;
+        background-color: #f2f2f2;
+    }
+.index-links div h3 {
+    font-family: catamaran garamond;
+    font-size: 28px;
+    color: #111;
+    text-align: center;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 100px;
+    text-transform: uppercase;
+}
+@media only screen and (min-width:1000px){
+    .wrapper{
+width: 1000px;
+margin:0 auto;
+
+
+    }
+    .index-banner{
+        height: 450px;
+}
+.index-banner h1{
+  display: block; 
+  width:560px;
+  margin: 0 auto; 
+  text-align: center;
 }  
-
-button{
-    background-color: brown;
+.index-links{
+padding-bottom: 20px;
+overflow: hidden;
 }
+.index-links div {
+    margin: 20px 10px 0;
+    height: 230px;
+    background-color: #f2f2f2;
+    float: left;
+}
+
+.index-boxlink-square{
+    width: calc(25% - 20px) ! important;
+
+}
+.index-boxlink-rectangle{
+    width: calc(50% - 20px) ! important;
+
+}
+
+.index-links div h3 {
+    line-height: 230px;
+}
+
+
+         }
+
+footer{
+    width: calc(100% - 80px); 
+    padding: 40px 40px; 
+    background-color: #111;
+    margin-top: 20px;
+    overflow: hidden;
+    }
+
+
+
+    footer ul{
+      
+        width: fit-content;
+        float: left;
+        padding-left: 40px;
+    }
+    footer ul li{
+        display: block;
+        list-style: none;
+      
+        }
+        footer ul li a{
+        font-family: catamaran;
+        font-size: 26px;
+        color: #fff;
+        line-height: 40px;  
+        }
+        .footer-links-cases{
+            display: none;
+        }
+
+        .footer-sm{
+
+         width: 50px; 
+          float: left;
+          
+        }
+    .footer-sm img{
+
+    width: 100%; 
+    float: right;
+    margin-bottom: 10px;
+    margin-left: 220px;
+    }
+    @media only screen and (min-width:1000px){
+    .footer-links-cases{
+    display: block;
+    }
+    footer ul{
+    padding-right: 30px;
+    }
+    footer ul li p {
+    font-family: catamaran;
+    font-size: 26px;
+    color: #fff;
+    line-height: 50px; 
+    text-transform: uppercase; 
+    }
+        }
+        
