@@ -135,5 +135,6 @@ function loadTheme() {
 // The tasks should automatically reload when you refresh the page.
 
 function addTask(){
-
+    var taskInput = document.getElementById("taskInput");
+    var taskText = taskInput.value;
 }
